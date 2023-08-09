@@ -1,0 +1,484 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daksh - Phishing Links Detection</title>
+  <link rel="icon" type="image/x-icon" href="{% static '/Dakshlogo.jpg' %}">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/2638380501.js" crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+  <style>
+    @function makelongshadow($length, $angle) {
+      $val: 0px 0px transparent;
+      @for $i from 1 through $length {
+        $val: #{$val}, #{$i}px #{$i * $angle}px #aaa;
+      }
+      @return $val;
+    }
+    @import url("https://fonts.googleapis.com/css2?family=Tektur&display=swap");
+    body {
+      background: linear-gradient(to bottom, #87CEEB, #E6E6FA);
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: cover; 
+      overflow: hidden;
+      padding-top: 40vh;
+    }
+    .txt {
+      text-align: center;
+      font-family: "Tektur";
+      font-size: 12vmin;
+      font-weight: 700;
+      animation: netflix_style 3.5s infinite;
+      outline: none;
+      white-space: nowrap;
+    }
+    @keyframes netflix_style {
+      0% {
+        text-shadow: makelongshadow(100, 1);
+        color: #f3f3f3;
+        transform: scale(1.5, 1.5);
+      }
+      10% {
+        text-shadow: makelongshadow(100, 1.5);
+        color: #f3f3f3;
+        transform: scale(1.5, 1.5);
+      }
+      15% {
+        color: #f3f3f3;
+      }
+      20% {
+        color: #e90418;
+        text-shadow: none;
+        transform: scale(1.1, 1.1);
+      }
+      75% {
+        opacity: 1;
+      }
+      80% {
+        opacity: 0;
+        color: #000;
+        transform: scale(0.85, 0.9);
+      }
+      100% {
+        opacity: 0;
+      }
+    }
+    body {
+      background-color: #f8f8f8;
+      color: #333;
+      font-family: 'Roboto', sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      place-items: center;
+      height: 100vh;
+      text-align: center;
+      margin-bottom: 50px;
+      background: linear-gradient(to bottom, #87CEEB, #E6E6FA);
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: cover;
+    }
+    h1 {
+      font-size: 48px;
+      text-align: center;
+      margin: 0;
+      color: #333;
+    }
+    h2 {
+      font-size: 32px;
+      text-align: center;
+      margin: 10px 0;
+      color: #333;
+    }
+    p {
+      font-size: 18px;
+      line-height: 1.6;
+      color: #333;
+    }
+    nav {
+      padding-bottom: 1rem;
+      background-color: #333;
+    }
+    table {
+      margin-left:auto;
+      margin-right:auto;
+    }
+    .main-content {
+      margin-bottom: 1rem;
+    }
+    .header-container {
+      display: flex; 
+      justify-content: center; 
+      align-items: center; 
+      height: 48px;
+      background-color: #333;
+      color: #fff;
+      padding: 10px;
+    }
+    .header-container .logo {
+      max-width: 48px;
+      height: 48px;
+      margin-right: 20px;
+    }
+    .header-container h1 {
+      font-size: 48px;
+      color: #333;
+      margin: 0;
+    }
+    .tab {
+      padding: 8px 16px; 
+      cursor: pointer;
+      font-size: 16px; 
+      background-color: #333;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      margin: 5px;
+    }
+    .tab.active {
+      background-color: #555;
+    }
+    .tab-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      position: relative;
+    }
+    .tab-content {
+      display: none;
+      padding: 20px;
+      background-color: #fff;
+      text-align: center;
+      max-width: 800px;
+      margin: 10px auto; 
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      overflow-y: auto;
+      margin-bottom: 20px;
+    }
+    .tab-content h2 {
+      color: #333;
+    }
+    .tab-content p {
+      color: #555;
+    }
+    .tab-content form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .tab-content form input[type="text"],
+    .tab-content form input[type="email"],
+    .tab-content form input[type="long"],
+    .tab-content form input[type="date"],.tab-content form input[type="file"],
+    .tab-content form select,
+    .tab-content form textarea {
+      margin: 0.5px 0.5rem;
+      padding: 0.5px 0.5rem; 
+    }
+    .tab-content form label {
+      margin-bottom: 5px;
+    }
+    .tab-content form input[type="submit"] {
+      background-color: #555;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+      margin-top: 10px; 
+    }
+    .tab-content form input[type="submit"]:hover {
+      background-color: #333;
+      text-align: center;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .contact-info p {
+      color: #555;
+    }
+    .center-table table {
+      padding: 20px;
+      max-width: 800px;
+      margin: 10px auto;
+      table-layout: fixed;
+      border-collapse: collapse;
+      width: 100%;
+    }
+    .center-table table th, .center-table table td {
+      padding: 10px;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+    .center-table table th {
+      background-color: #f8f8f8;
+    }
+    #vighat {
+      max-width: 400px;
+      margin: 10px auto; 
+    }
+    .footer-container {
+      justify-content: center;
+      align-items: center;
+      position: fixed; 
+      bottom: 0;
+      left: 0;
+      right: 0; 
+      background-color: #333;
+      color: #fff;
+      padding: 10px;
+      text-align: center;
+      height: 30px; 
+    }
+    .footer-text {
+      color: #fff;
+      font-size: 14px;
+    }
+    footer {
+      background-color: #333;
+      color: #fff;
+      padding: 10px;
+      text-align: center;
+      width: 100%;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      padding: 5px;
+    }
+    tab-content form input[type="file"]#csvFile {
+      margin: 0rem 0.5rem 0.5rem 0.5rem;
+      padding: 0rem 0.5rem 0.5rem 0.5rem;
+  }
+    .center-align {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+    .content {
+      display: none;
+    }
+    .scrollable-content {
+      max-height: 400px; 
+      overflow-y: auto;
+    }
+    ::-webkit-scrollbar {
+      width: 10px; 
+    }
+    ::-webkit-scrollbar-thumb {
+      background-color: #555;
+      border-radius: 5px; /* Rounded corners */
+    }
+    ::-webkit-scrollbar-track {
+      background-color: #f1f1f1;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background-color: #333;
+    }
+  </style>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const animationElement = document.querySelector(".animation");
+      const contentContainer = document.querySelector(".content");
+
+      setTimeout(function () {
+        animationElement.style.opacity = "0"; // Fade out the animation
+        setTimeout(function () {
+          animationElement.style.display = "none"; // Hide the animation
+          contentContainer.style.display = "block"; // Show the content
+        }, 1000); // Delay for 1 second after fade out
+      }, 3000); // Display the animation for 5 seconds
+    });
+  </script>
+</head>
+<body>
+  <div class="animation">
+    <div class="txt" contenteditable="true">Daksh</div>
+  </div>
+  <div class="content">
+    <div class="tab-container">
+      <nav class="navbar navbar-expand-sm navbar-dark sticky-top">
+        <div class="header-container">
+          <img class="logo" src="{% static '/Dakshlogo.jpg' %}" alt="Daksh Logo">
+          <a class="navbar-brand" href="">Daksh</a>
+        </div>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="tab" onclick="openTab(event, 'tab1')">Information</div>
+        <div class="tab" onclick="openTab(event, 'tab2')">Register for Data Transfer</div>
+        <div class="tab" onclick="openTab(event, 'tab3')">Registration for Node</div>
+        <div class="tab" onclick="openTab(event, 'tab4')">Contact Us</div>
+        <div class="tab" onclick="openTab(event, 'tab5')">About Us</div>
+      </nav>
+    </div>
+    <div class="main-content">
+      <div id="tab1" class="tab-content">   
+        <div class="scrollable-content">
+          <h2>AI-enabled Phishing Links Detection and Alert System</h2>
+          <p class="bodytext">Daksh is a cutting-edge program that will transform the way phishing URLs are checked for corruption or dangerous material. Daksh can identify and categorize malformed URLs without relying on centralized data by leveraging the power of federated learning. This technique of continual learning guarantees that the application is always up to date with the newest URL dangers while protecting user privacy and data security. This article delves into the underlying ideas, federated learning implementation, and the possible influence of Daksh on cybersecurity.</p>
+          <p class="bodytext">When a URL is modified, it redirects people to undesired and potentially hazardous websites. These tainted URLs frequently trick visitors into disclosing personal information, installing malware, or falling prey to phishing attempts. Daksh's goal is to find and classify such URLs by analysing their content, structure, and behaviour.</p>
+          <p class="bodytext">Daksh's strength resides in its capacity to constantly adapt from new and developing threats. As consumers visit multiple URLs on a regular basis, the decentralised models continually acquire data to enhance their accuracy. The global model is updated on a regular basis by pooling these revised models from individual devices. Daksh maintains current with the ever-changing URL threat landscape because this seamless learning process is powered by federated learning.</p>
+        </div>
+      </div>
+      <div id="tab2" class="tab-content">
+        <div class="scrollable-content">
+          <form action="submitForm" method="POST">
+          {% csrf_token %}
+          <h2>Register for Data Transfer</h2>
+          <p>Please fill in the details below:</p>
+          <input placeholder="Name" type="text" id="name" name="entry.123456789" required>
+          <br>
+          <input placeholder="Email address" type="email" id="email" name="entry.234567890" required>
+          <br>
+          <input placeholder="Institution" type="text" id="institution" name="entry.987654321" required>
+          <br>
+          <input placeholder="Remarks" type="text" rows="2" id="remarks" name="entry.567890123"></input>
+          <br>
+          <div class="center-align">
+            <label for="date">Date of Generation:</label>
+            <input type="date" id="date" name="entry.456789012" required>
+          </div>
+          <div class="center-align">
+            <label for="csvFile">CSV File:</label>
+            <input type="file" id="csvFile" name="csvFile" accept=".csv">
+          </div>
+          <br>
+          <input type="submit" value="Submit">
+        </form>
+      </div>
+    </div>
+    <div id="tab3" class="tab-content">
+      <div class="scrollable-content">
+        <form action="submitForm" method="POST">
+          {% csrf_token %}
+          <h2>Registration for Node</h2>
+          <p>Please fill the details below:</p>
+          <input placeholder="Node Name" type="text" id="node_name" name="entry.123456789" required>
+          <br>
+          <input placeholder="Institution" type="text" id="institution" name="entry.987654321" required>
+          <br>
+          <input placeholder="Dataset Details" type="text" rows="2" id="dataset_details" name="entry.567890123" required></input>
+          <br>
+          <label for="computation_type">Computation Type:</label>
+          <br>
+          <select id="computation_type" name="entry.456789012" required>
+            <option value="">Select an option</option>
+            <option value="Data Processing">Data Processing</option>
+            <option value="Machine Learning">Machine Learning</option>
+            <option value="Other">Other</option>
+          </select>
+          <br>
+          <div class="center-align">
+            <label for="csvFile">CSV File:</label>
+            <input type="file" id="csvFile" name="csvFile" accept=".csv" class="csv-file-input">
+          </div>
+        <br>
+        <input type="submit" value="Submit">
+        </form>
+      </div>
+    </div>
+    <div id="tab4" class="tab-content">
+      <div class="scrollable-content">
+        <h2>Contact</h2>
+        <p>If you have any questions or feedback, please feel free to get in touch with us:</p>
+        <form action="submitForm" method="POST">
+          {% csrf_token %}
+          <input placeholder = "Name" type="text" id="name" name="name" required>
+          <br>
+          <input placeholder="Email" type="email" id="email" name="email" required>
+          <br>
+          <input placeholder="Phone Number" type="long" id="phone_no" name="phone_no" required>
+          <br>
+          <input placeholder = "Message" type="text" rows="2" id="message" name="message" required></input>
+          <br>
+          <input type="submit" value="Submit">
+        </form>
+        <div class="contact-info">
+          <p>Email: dakshaiphishing@gmail.com</p>
+        </div>
+      </div>
+    </div>
+      <div id="tab5" class="tab-content">
+        <div class="scrollable-content">
+          <h2>About Us</h2>
+          <p class="bodytext">URLs serve as gates to information and services as the internet becomes more embedded into our daily lives. Regrettably, the internet is also afflicted by a variety of security dangers, such as tainted URLs that route visitors to harmful websites. To protect consumers from potential intrusions, strong URL corruption detection systems have become critical.</p>
+          <p class="bodytext">Daksh is a game-changing tool that successfully detects malformed URLs by leveraging the power of federated learning, a decentralised approach to machine learning. Unlike traditional approaches that need centralised data stores, Daksh employs a distributed strategy that protects user privacy while assuring continual development through continuous learning.</p>
+          <p class="bodytext">In today's digital environment, privacy is a top priority. Daksh solves this challenge by using federated learning to take a privacy-first strategy. The data of users remains on their devices, and the central server never has access to raw data. Furthermore, the local models are encrypted during aggregation to avoid data leaking. Daksh guarantees that users' browsing history and personal information remain protected.</p>
+          <p class="bodytext">Daksh deployment provides various benefits to individuals and the larger cybersecurity landscape:
+            a. Real-time Threat Detection: Daksh's continuous learning guarantees that new URL risks are detected immediately, providing real-time protection against corruption and malicious redirection.
+            b. Lower Bandwidth Consumption: Federated learning decreases the requirement for data transmission to the central server, preserving bandwidth and improving user experience.
+            c. Device Diversity: Individuals' usage of a wide range of devices adds to a richer and more complete dataset, which improves the accuracy of Daksh's global model.
+            d. Cost-effectiveness: Daksh avoids the requirement for costly centralised infrastructure by utilising users' current devices for model training</p>
+          <p class="bodytext"><h3>WHY ARE WE USING FEDRATED LEARNING?</h3></p>
+          <p class="bodytext">Federated learning is a machine learning approach in which model training takes happen on decentralised devices rather than a central server, such as user cellphones or laptops. It allows Daksh to learn from a large network of devices while protecting user data privacy</p>
+          <h3>OUR TEAM</h3>
+          <img id="vighat" src="{% static '/vighat.jpg' %}" >
+          <p>The Problem Statement: AI enabled Phishing links detection and alert system</p>
+          <div class="centre-table">
+            <table border="1">
+              <tr>
+                <th>Name</th>
+                <th>Role</th>
+              </tr>
+              <tr>
+                <td>Shaswat Sharma</td>
+                <td>Team Leader and Data Scientist</td>
+              </tr>
+              <tr>
+                <td>Siddhi Gautam</td>
+                <td>Cyber Security Analyst</td>
+              </tr>
+              <tr>
+                <td>Priyal Gattani</td>
+                <td>Cyber Security Analyst</td>
+              </tr>
+              <tr>
+                <td>Harshita Mogha</td>
+                <td>Full Stack Developer</td>
+              </tr>
+              <tr>
+                <td>Paritosh Mittal</td>
+                <td>Full Stack Developer</td>
+              <tr>
+                <td>Priyanshi Srivastava</td>
+                <td>Data Scientist</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <div class="footer-container">
+      <p class="footer-text">© 2023 Daksh - AI-enabled Phishing Links Detection</p>
+    </div>
+    </footer>
+    <script>
+      function openTab(evt, tabName) {
+      var tabContents = document.getElementsByClassName("tab-content");
+      for (var i = 0; i < tabContents.length; i++) {
+        tabContents[i].style.display = "none";
+      }
+      var tabs = document.getElementsByClassName("tab");
+      for (var i = 0; i < tabs.length; i++) {
+        tabs[i].classList.remove("active");
+      }
+      document.getElementById(tabName).style.display = "block";
+      evt.currentTarget.classList.add("active");
+    }
+    document.getElementById("tab1").style.display = "block";
+    document.getElementsByClassName("tab")[0].classList.add("active");
+  </script>
+</body>
+</html>
